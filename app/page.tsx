@@ -1,9 +1,9 @@
-import Image from "next/image";
+import Container from "@/components/commons/Container";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-between min-h-screen p-24">
-      Task Management Application
-    </main>
+    <Container>
+      <div className="">Task List</div>
+    </Container>
   );
 }
