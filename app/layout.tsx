@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import Header from "@/components/commons/Header";
 import Footer from "@/components/commons/Footer";
+import ToastProvider from "@/providers/ToastProvider";
 
 // assign fonts a variable for tailwind-css usage
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
@@ -24,6 +25,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <ToastProvider />
       </body>
     </html>
   );
