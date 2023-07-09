@@ -1,15 +1,15 @@
 # Project Assignment: Building a Task Management Application
 
+Test the project live: https://next-task-management-three.vercel.app/
+
 ## User Interface
 
--
 - :heavy_check_mark: View Task List
 - :heavy_check_mark: Add New Task
 - :heavy_check_mark: Edit Task
 - :heavy_check_mark: Delete Task
 
 - :heavy_check_mark: Local Storage is used for storing the data
--
 
 ## Code Structure & Best Practices
 
@@ -18,6 +18,8 @@
 "" Can be easily scaled to larger applications
 
 "" Validation and Error handling for every form inputs.
+
+"" radix-ui is used to create custom ui elements with help of shadcn-ui
 
 "" toaster library is used for showing toasts
 
@@ -31,7 +33,13 @@
 
 ## Local Installation
 
-install the node_modules
+clone this repo:
+
+```bash
+git clone https://github.com/sw4pn/task-management-assignment.git
+```
+
+open the folder location and install the node_modules
 
 ```bash
 npm install

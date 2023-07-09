@@ -1,5 +1,5 @@
 "use client";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { observer } from "mobx-react-lite";
 import { twMerge } from "tailwind-merge";
 
@@ -25,14 +25,6 @@ const TaskList = observer(() => {
     fetchData();
   }, [taskStore]);
 
-  // Sort task list by status
-  const sortedTaskList = taskStore.taskList
-    ? taskStore.taskList.slice().sort((a, b) => {
-        const statusOrder: any = { todo: 1, progress: 2, done: 3 };
-        return statusOrder[a.status] - statusOrder[b.status];
-      })
-    : [];
-
   return (
     <div className="p-2 mt-5">
       {loading ? (
@@ -40,8 +32,8 @@ const TaskList = observer(() => {
           <LoadingTask />
           <LoadingTask />
         </>
-      ) : sortedTaskList.length > 0 ? (
-        sortedTaskList.map((task, index) => {
+      ) : taskStore.taskList.length > 0 ? (
+        taskStore.taskList.map((task, index) => {
           const bgColor =
             task.status === "done"
               ? "opacity-70 bg-neutral-50"
