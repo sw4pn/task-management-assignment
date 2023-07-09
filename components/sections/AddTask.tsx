@@ -23,6 +23,14 @@ const AddTask = observer(() => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    // Validate title and description
+    if (
+      taskDetails.title.trim() === "" ||
+      taskDetails.description.trim() === ""
+    ) {
+      toast.error("Title and description cannot be empty.");
+      return;
+    }
 
     // Assign task values to taskStore.task
     taskStore.task.title = taskDetails.title;
@@ -50,7 +58,7 @@ const AddTask = observer(() => {
         onChange={(e) => updateTaskDetails("title", e.target.value)}
       />
       <Input
-        id="add_title"
+        id="add_desc"
         placeholder="Description"
         value={taskDetails.description}
         onChange={(e) => updateTaskDetails("description", e.target.value)}

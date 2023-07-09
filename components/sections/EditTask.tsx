@@ -18,12 +18,15 @@ import { Label } from "../ui/Label";
 
 import { ITask } from "@/store/TaskStore";
 import { useStore } from "@/hooks/useStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-hot-toast";
 
 const EditTask = ({ task }: { task: ITask }) => {
   const {
     rootStore: { taskStore },
   } = useStore();
+
+  const [disabled, setDisabled] = useState(true);
 
   const [details, setDetails] = useState({
     title: task.title,
@@ -31,8 +34,22 @@ const EditTask = ({ task }: { task: ITask }) => {
     status: task.status,
   });
 
+  useEffect(() => {
+    if (details.title.trim() === "" || details.description.trim() === "") {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  }, [details]);
+
   const handleEdit = () => {
+    // Validate title and description
+    if (details.title.trim() === "" || details.description.trim() === "") {
+      toast.error("Title and description cannot be empty.");
+      return;
+    }
     taskStore.updateTask(task.id, details);
+    toast.success("Task updated successfully");
   };
 
   const handleChange = (val: {}) => {
@@ -51,6 +68,7 @@ const EditTask = ({ task }: { task: ITask }) => {
           <AlertDialogTitle>Edit task</AlertDialogTitle>
           <AlertDialogDescription>
             Update the title and description of task.
+            <p className="text-sm">* fields cannot be empty.</p>
           </AlertDialogDescription>
         </AlertDialogHeader>
         <div className="flex flex-col gap-5">
@@ -66,10 +84,10 @@ const EditTask = ({ task }: { task: ITask }) => {
           </div>
 
           <div className="flex items-center justify-between gap-4">
-            <Label htmlFor="edit_title">Description:</Label>
+            <Label htmlFor="edit_desc">Description:</Label>
             <Input
-              id="edit_title"
-              placeholder="Title"
+              id="edit_desc"
+              placeholder="Description"
               className="max-w-xs"
               value={details.description}
               onChange={(e) => handleChange({ description: e.target.value })}
@@ -78,7 +96,9 @@ const EditTask = ({ task }: { task: ITask }) => {
         </div>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={handleEdit}>Continue</AlertDialogAction>
+          <AlertDialogAction disabled={disabled} onClick={handleEdit}>
+            Continue
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

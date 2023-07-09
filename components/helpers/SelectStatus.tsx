@@ -10,6 +10,7 @@ import {
 } from "../ui/Select";
 import { useStore } from "@/hooks/useStore";
 import { observer } from "mobx-react-lite";
+import { toast } from "react-hot-toast";
 
 const SelectStatus = observer(
   ({
@@ -30,7 +31,11 @@ const SelectStatus = observer(
     // change the status of the task.
     const handleStatusChange = (val: any) => {
       // change only if task exists
-      if (id) taskStore.updateTask(id, { status: val });
+      if (id) {
+        taskStore.updateTask(id, { status: val });
+
+        toast.success("Task Status changed successfully");
+      }
     };
 
     // select the task status for add tasks

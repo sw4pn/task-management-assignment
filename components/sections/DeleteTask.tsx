@@ -15,6 +15,7 @@ import {
 import { RiDeleteBinLine } from "react-icons/ri";
 import { ITask } from "@/store/TaskStore";
 import { useStore } from "@/hooks/useStore";
+import { toast } from "react-hot-toast";
 
 const DeleteTask = ({ task }: { task: ITask }) => {
   const {
@@ -23,6 +24,7 @@ const DeleteTask = ({ task }: { task: ITask }) => {
 
   const handleDelete = () => {
     taskStore.deleteTask(task.id);
+    toast.success("Task successfully deleted.");
   };
 
   return (
