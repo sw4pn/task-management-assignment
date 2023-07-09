@@ -12,10 +12,6 @@ export default function Home() {
           className={buttonVariants({ variant: "default" })}>
           Add Task
         </Link>
-        <div className="text-neutral-600 text-sm max-w-sm italic font-mont">
-          {" "}
-          Task are automatically sorted by: ToDo, In Progress, Completed
-        </div>
       </div>
 
       <TaskList />
